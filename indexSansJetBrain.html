@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Index des Sets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e2f;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            width: 250px;
+            height: 320px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+        .card-title {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h1>Choisissez votre Set</h1>
+<div class="container" id="cardsContainer"></div>
+
+<script>
+    // Liste des pages et images associées
+    const sets = [
+        {
+            title: "Set légendaire pour druide",
+            file: "Set légendaire pour druide.html",
+            image: "./img/fonddruide.png"
+        },
+        {
+            title: "Set Divin de Sunie",
+            file: "Set Divin de Sunie.html",
+            image: "./img/sunie.png"
+        },
+        {
+            title: "Set de l’Ombre Parfaite",
+            file: "Set de l’Ombre Parfaite.html",
+            image: "./img/bgAssassin.png"
+        }
+    ];
+
+    const container = document.getElementById("cardsContainer");
+
+    sets.forEach(set => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+        <img src="${set.image}" alt="${set.title}">
+        <div class="card-title">${set.title}</div>
+      `;
+        card.addEventListener("click", () => {
+            window.location.href = set.file;
+        });
+        container.appendChild(card);
+    });
+</script>
+</body>
+</html>

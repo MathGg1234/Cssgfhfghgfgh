@@ -1,0 +1,382 @@
+
+
+html, body {
+    scrollbar-width: none;
+    height: 100%; /* Assure que le body prend toute la hauteur */
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    background-size: cover; /* adapte l'image à l'écran */
+    background-repeat: no-repeat; /* empêche de répéter l'image */
+    background-position: center; /* centre l'image */
+    position: relative; /* nécessaire pour ::before */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin: 0 auto;
+}
+
+/* Voile blanc semi-transparent sur toute la page */
+body::before {
+    content: "";
+    position: fixed; /* FIXÉ à l'écran, pas seulement au body */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.3);
+    z-index: 0;
+    pointer-events: none; /* ne bloque pas les clics */
+}
+
+/* Contenu au-dessus du voile */
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+/**
+ * TOP-CONTAINER
+ *
+ * - Conteneur principal en haut de la page regroupant :
+ *    → La section `infoSet` (présentation du set)
+ *    → La section `effetSet` (effets combinés du set)
+ *
+ * - Utilise Flexbox :
+ *    → `justify-content: center` : centre horizontalement
+ *    → `align-items: stretch` : force les deux blocs à avoir la même hauteur
+ *    → `gap: 30px` : espace constant entre les deux
+ *    → `flex-wrap: wrap` : passe en colonne sur mobile
+ *
+ * Objectif : afficher les deux blocs côte à côte en desktop,
+ * tout en restant responsive sur petits écrans.
+ */
+
+
+
+.top-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;      /* aligne et force la même hauteur */
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 30px auto;
+}
+
+.infoSet,
+.effetSet {
+    width: 45%;
+    min-width: 300px;
+    /* pas de height fixe */
+}
+
+
+/**
+ * INFOSET
+ *
+ * - Bloc d’informations principales sur le set :
+ *    → Largeur responsive (45% desktop, min 300px)
+ *    → Bordure marron bois + fond translucide
+ *    → Ombre douce pour un effet de profondeur
+ *
+ * - Décorations :
+ *    → `::before` et `::after` affichent des étoiles décoratives
+ *
+ * - Contenu :
+ *    → Titre `h1` avec police décorative Cinzel et effet ombré
+ *    → Texte `p` avec fond légèrement sombre et arrondi
+ *
+ * Objectif : donner un aspect parchemin décoratif et lisible.
+ */
+
+
+.infoSet {
+    /* Placement */
+    text-align: center;
+    padding: 20px;
+    width: 45%;
+    min-width: 300px; /* pour éviter d'être trop petites en responsive */
+
+    /* Bordure façon bois */
+    border: 4px solid var(--color-div-border);
+    border-radius: 20px;
+
+    /* Fond légèrement transparent pour lisibilité */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+
+    /* Ombre douce pour relief */
+    box-shadow: 0 0 15px rgba(50, 30, 10, 0.4);
+
+    /* Ajout d'un contour décoratif d'étoiles avec un pseudo-élément */
+    position: relative;
+
+    /* Flexbox pour centrer le contenu verticalement */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Décoration étoiles haut/bas  */
+.infoSet::before {
+    content: var(--content-border-divInfSet);
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: rgba(255, 255, 200, 0.8);
+    letter-spacing: 10px;
+    pointer-events: none;
+}
+
+.infoSet::after {
+    content: var(--content-border-divInfSet);
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: rgba(255, 255, 200, 0.8);
+    letter-spacing: 10px;
+    pointer-events: none;
+}
+
+/* Titre principal */
+.infoSet h1 {
+    font-family: "Cinzel Decorative", serif;
+    font-size: 2rem;
+    color: #f5e6d3; /* couleur parchemin clair */
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
+}
+
+/* Texte descriptif */
+.infoSet p {
+    font-family: "Merriweather", serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e3d5c0;
+    padding: 10px 15px;
+    background: var(--color-div-p);
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(50, 30, 10, 0.2);
+}
+
+
+/**
+ * EFFETSET
+ *
+ * - Bloc qui détaille les effets du set complet :
+ *    → Largeur responsive (45% desktop, min 300px)
+ *    → Bordure bois clair + fond translucide
+ *    → Ombre douce pour cohérence visuelle
+ *
+ * - Décorations :
+ *    → `::before` et `::after` affichent des motifs d’arbres et d’étoiles
+ *
+ * - Contenu :
+ *    → Titre `h2` en Cinzel Decorative avec ombre
+ *    → Texte `p` lisible sur fond sombre légèrement verdâtre
+ *    → Liste `ul` personnalisée avec icône 🌿 avant chaque élément
+ *
+ * Objectif : présenter les effets magiques du set avec une ambiance
+ * végétale et élégante.
+ */
+
+
+.effetSet {
+    text-align: center;
+    padding: 20px;
+    width: 45%;
+    min-width: 300px; /* pour éviter d'être trop petites en responsive */
+
+    /* Bordure bois clair */
+    border: 4px solid var(--color-div-border);
+    border-radius: 20px;
+
+    /* Fond translucide */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+
+    /* Ombre douce */
+    box-shadow: 0 0 15px rgba(60, 40, 20, 0.4);
+
+    /* Position relative pour les décorations */
+    position: relative;
+
+    /* Flexbox pour organiser le contenu */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Décoration étoiles haut/bas comme infoSet */
+.effetSet::before {
+    content: var(--content-border-divEffetSet);
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: rgba(200, 255, 200, 0.8);
+    letter-spacing: 8px;
+}
+
+.effetSet::after {
+    content: var(--content-border-divEffetSet);
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: rgba(200, 255, 200, 0.8);
+    letter-spacing: 8px;
+}
+
+/* Titres & paragraphes similaires */
+.effetSet h2 {
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.8rem;
+    color: #dff0d8; /* vert doux */
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
+}
+
+.effetSet p {
+    font-family: "Merriweather", serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e3f5d0;
+    padding: 10px 15px;
+    background: var(--color-div-p);
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(30, 50, 30, 0.2);
+}
+
+.effetSet ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.effetSet ul li::before {
+    content: "✦ ";
+    color: rgba(228, 163, 163, 0.5);
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+/**
+ *  STYLE DES CARTES "OBJET"
+ *
+ * - Conteneur `.objet-container`
+ *   → Affiche les objets en mode grille flexible (max 3 par ligne)
+ *   → Centre les éléments et gère l'espacement avec `gap`
+ *
+ * - Styles communs aux cartes `.objet1` ... `.objet5`
+ *   → Fond translucide marron clair avec bordure douce
+ *   → Effet de relief (ombre externe + interne)
+ *   → Animation légère au survol (hover)
+ *
+ * - Titres `<h2>`
+ *   → Police décorative (Cinzel)
+ *   → Couleur parchemin clair + effet d'ombre
+ *
+ * - Paragraphes `<p>`
+ *   → Police élégante (Merriweather)
+ *   → Fond légèrement assombri pour lisibilité
+ *
+ * - Listes `<ul>`
+ *   → Icône personnalisée "✦" avant chaque élément
+ *   → Espacement réduit entre les lignes
+ *
+ * Objectif : donner un style élégant, immersif et lisible pour les cartes d’objets
+ */
+
+.objet-container {
+    display: flex;
+    flex-wrap: wrap;         /* permet plusieurs lignes */
+    justify-content: center; /* centre chaque ligne */
+    gap: 20px;
+    width: 90%;
+    margin: 30px auto;
+    margin-bottom: 20px;
+}
+
+/* Style commun aux objets */
+.objet1, .objet2, .objet3, .objet4, .objet5 {
+    flex: 1 1 calc(10% - 20px); /* max 3 par ligne */
+    max-width: 300px;          /* empêche d'être trop larges */
+    background: rgba(0, 0, 0, 0.5); /* léger fond translucide */
+    border: 3px solid var(--color-divcontent-border);
+    border-radius: 15px;
+    padding: 20px;
+    color: #f4eadd;
+
+    /* Effet relief */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 8px rgba(80,50,30,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover un peu magique */
+.objet1:hover, .objet2:hover, .objet3:hover, .objet4:hover, .objet5:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.4), inset 0 0 12px rgba(120,80,50,0.3);
+}
+
+/* Titres des objets */
+.objet1 h2, .objet2 h2, .objet3 h2, .objet4 h2, .objet5 h2 {
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.4rem;
+    color: #f8e6c6;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
+}
+
+/* Paragraphe descriptif */
+.objet1 p, .objet2 p, .objet3 p, .objet4 p, .objet5 p {
+    font-family: "Merriweather", serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #e8dcc7;
+    background: var(--color-div-p);
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* Listes à puces */
+.objet1 ul, .objet2 ul, .objet3 ul, .objet4 ul, .objet5 ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+/* Style des puces */
+.objet1 ul li::before,
+.objet2 ul li::before,
+.objet3 ul li::before,
+.objet4 ul li::before,
+.objet5 ul li::before {
+    content: "✦ ";
+    color: #d8b48e;
+    font-weight: bold;
+}
+
+.objet1 ul li, .objet2 ul li, .objet3 ul li, .objet4 ul li, .objet5 ul li {
+    margin-bottom: 6px;
+}

@@ -1,274 +1,130 @@
 <html>
-   <head>
-      <style>
+<head>
+   <link rel="stylesheet" href="./style/style.css">
+   <style>
+      :root{
+         --color-div-border: rgba(101, 67, 33, 0.5);  /* marron chêne semi-transparent */
+         --color-divcontent-border: rgba(139, 94, 60, 0.4); /* marron clair, pâle */
+         --color-div-p: rgba(50, 35, 20, 0.3); /* marron,  très pâle */
+         --content-border-divEffetSet: "🌳 ✧ ✦ ✧ 🌳";
+         --content-border-divInfSet: "✨ ✦ ✧ ✦ ✨";
+      }
 
-         body {
-            background-image: url("./fonddruide.png");
-            background-size: cover; /* adapte l’image à l’écran */
-            background-repeat: no-repeat; /* empêche de répéter l’image */
-            background-position: center; /* centre l’image */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: white;
-            width: 60%;
-            margin: 0 auto; /* centre le contenu dans la page */
-         }
+      body{
+         background-image: url("./img/fonddruide.png");
 
-         .infoSet {
-            /* Placement */
-            text-align: center;
-            margin: 30px auto;
-            padding: 20px;
-            width: 80%;
-
-            /* Bordure façon bois */
-            border: 4px solid rgba(101, 67, 33, 0.5); /* marron chêne semi-transparent */
-            border-radius: 20px;
-
-            /* Fond légèrement transparent pour lisibilité */
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
-
-            /* Ombre douce pour relief */
-            box-shadow: 0 0 15px rgba(50, 30, 10, 0.4);
-
-            /* Ajout d’un contour décoratif d’étoiles avec un pseudo-élément */
-            position: relative;
-         }
-
-         .infoSet::before {
-            content: "✨ ✦ ✧ ✦ ✨";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.4rem;
-            color: rgba(255, 255, 200, 0.8);
-            letter-spacing: 10px;
-            pointer-events: none;
-         }
-
-         .infoSet::after {
-            content: "✨ ✦ ✧ ✦ ✨";
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.4rem;
-            color: rgba(255, 255, 200, 0.8);
-            letter-spacing: 10px;
-            pointer-events: none;
-         }
-
-         /* Titre principal */
-         .infoSet h1 {
-            font-family: "Cinzel Decorative", serif;
-            font-size: 2rem;
-            color: #f5e6d3; /* couleur parchemin clair */
-            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
-            margin-bottom: 15px;
-         }
-
-         /* Texte descriptif */
-         .infoSet p {
-            font-family: "Merriweather", serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e3d5c0;
-            padding: 10px 15px;
-            background: rgba(60, 40, 20, 0.4);
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(50, 30, 10, 0.2);
-         }
+      }
 
 
-         .objet-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            width: 90%;
-            max-width: 1200px;
-            margin: 30px auto;
-
-            /* Ajout important */
-            justify-content: center; /* centre les colonnes incomplètes */
-         }
-
-         /* Style commun aux objets */
-         .objet1, .objet2, .objet3, .objet4, .objet5 {
-            background: rgba(40, 30, 20, 0.25); /* léger fond translucide */
-            border: 3px solid rgba(139, 94, 60, 0.4); /* marron clair, pâle */
-            border-radius: 15px;
-            padding: 20px;
-            color: #f4eadd;
-
-            /* Effet relief */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 8px rgba(80,50,30,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-         }
-
-         /* Hover un peu magique */
-         .objet1:hover, .objet2:hover, .objet3:hover, .objet4:hover, .objet5:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.4), inset 0 0 12px rgba(120,80,50,0.3);
-         }
-
-         /* Titres des objets */
-         .objet1 h2, .objet2 h2, .objet3 h2, .objet4 h2, .objet5 h2 {
-            font-family: "Cinzel Decorative", serif;
-            font-size: 1.4rem;
-            color: #f8e6c6;
-            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
-            margin-bottom: 10px;
-         }
-
-         /* Paragraphe descriptif */
-         .objet1 p, .objet2 p, .objet3 p, .objet4 p, .objet5 p {
-            font-family: "Merriweather", serif;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #e8dcc7;
-            background: rgba(50, 35, 20, 0.3);
-            padding: 10px;
-            border-radius: 15px;
-            margin-bottom: 10px;
-         }
-
-         /* Listes à puces */
-         .objet1 ul, .objet2 ul, .objet3 ul, .objet4 ul, .objet5 ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 10px;
-         }
-
-         .objet1 ul li::before,
-         .objet2 ul li::before,
-         .objet3 ul li::before,
-         .objet4 ul li::before,
-         .objet5 ul li::before {
-            content: "✦ ";
-            color: #d8b48e;
-            font-weight: bold;
-         }
-
-         .objet1 ul li, .objet2 ul li, .objet3 ul li, .objet4 ul li, .objet5 ul li {
-            margin-bottom: 6px;
-         }
+   </style>
+</head>
+<body>
+<div class="top-container">
+   <div class="infoSet">
+      <h1 id="-set-du-c-ur-sylvestre-l-h-ritage-du-premier-arbre-">🌿 Set du Cœur Sylvestre — <em>L'Héritage du Premier Arbre</em> 🌿</h1>
+      <p><strong>Nombre d'objets</strong> : 5<br><strong>Type</strong> : Objets magiques légendaires<br><strong>Thème</strong> : Vie, régénération, saisons, lien animal, communion naturelle<br><strong>Effet complet</strong> : Fusion temporaire avec l'esprit du monde vivant (Gaïa, Silvanus, ou une entité primordiale selon ton monde) 🌍</p>
+   </div>
 
 
+   <div class="effetSet">
 
-
-
-      </style>
-   </head>
-   <body>
-
-      <div class="infoSet">
-         <h1 id="-set-du-c-ur-sylvestre-l-h-ritage-du-premier-arbre-">🌿 Set du Cœur Sylvestre — <em>L’Héritage du Premier Arbre</em> 🌿</h1>
-         <p><strong>Nombre d’objets</strong> : 5<br><strong>Type</strong> : Objets magiques légendaires<br><strong>Thème</strong> : Vie, régénération, saisons, lien animal, communion naturelle<br><strong>Effet complet</strong> : Fusion temporaire avec l’esprit du monde vivant (Gaïa, Silvanus, ou une entité primordiale selon ton monde) 🌍</p>
-      </div>
-
-
-
-
-      <div class="objet-container">
-         <div class="objet1">
-            <h2 id="-1-manteau-de-l-corce-vivante-cape-armure-druidique-l-gendaire-">🧥 1. Manteau de l’Écorce Vivante <em>(Cape/armure druidique, légendaire)</em></h2>
-            <p><strong>Effet</strong> :  </p>
+      <h2 id="-effet-de-set-communion-primordiale-">🌿 Effet de Set — <em>Communion Primordiale</em></h2>
+      <p>Lorsque les <strong>5 objets</strong> sont réunis, le druide peut activer <strong>l'Héritage du Premier Arbre</strong> :  </p>
+      <ul>
+         <li>🌍 <strong>Durée</strong> : 10 minutes (<strong>1/semaine</strong>)  </li>
+         <li>
+            Vous devenez une <strong>incarnation vivante de la nature</strong> :
             <ul>
-               <li>🌱 <strong>CA de base 16 + DEX</strong>, vous bénéficiez d’<strong>avantage</strong> contre les attaques de plantes, d’élémentaires et de bêtes hostiles.  </li>
-               <li>🌿 Chaque fois que vous subissez des dégâts, la cape pousse des <strong>ronces</strong> qui infligent <strong>1d6 dégâts nécrotiques</strong> à l’assaillant.  </li>
-               <li>🌳 Vous pouvez vous <strong>cacher instantanément</strong> dans un arbre (comme <em>marche sylvestre</em>).  </li>
+               <li>🐾 Toutes vos <strong>formes de druide</strong> sont fusionnées (combinez jusqu'à <strong>2 formes animales</strong>).  </li>
+               <li>😱 Les créatures hostiles à la nature (morts-vivants, artificiels, corrompus) doivent réussir un <strong>jet de Sagesse DD 20</strong> ou <strong>fuir</strong>.  </li>
+               <li>🦋 Toutes les créatures naturelles (bêtes, fées, élémentaires) deviennent vos <strong>alliées</strong> pendant cette période.  </li>
+               <li>🌳 À la fin de l'effet : vous laissez un <strong>sanctuaire naturel permanent</strong> là où vous avez activé le pouvoir.  </li>
             </ul>
-            <p><strong>Visuel</strong> : Une cape vivante tissée de mousse, de lianes et de feuillages qui réagissent au climat, ondulant doucement comme une forêt vivante.</p>
-         </div>
+         </li>
+      </ul>
+      <p><strong>Visuel</strong> : Une aura verdoyante enveloppe le druide, des racines et des fleurs éphémères jaillissant du sol à chacun de ses pas.</p>
+
+   </div>
+</div>
+
+
+
+<div class="objet-container">
+   <div class="objet1">
+      <h2 id="-1-manteau-de-l-corce-vivante-cape-armure-druidique-l-gendaire-">🧥 1. Manteau de l'Écorce Vivante <em>(Cape/armure druidique, légendaire)</em></h2>
+      <p><strong>Effet</strong> :  </p>
+      <ul>
+         <li>🌱 <strong>CA de base 16 + DEX</strong>, vous bénéficiez d'<strong>avantage</strong> contre les attaques de plantes, d'élémentaires et de bêtes hostiles.  </li>
+         <li>🌿 Chaque fois que vous subissez des dégâts, la cape pousse des <strong>ronces</strong> qui infligent <strong>1d6 dégâts nécrotiques</strong> à l'assaillant.  </li>
+         <li>🌳 Vous pouvez vous <strong>cacher instantanément</strong> dans un arbre (comme <em>marche sylvestre</em>).  </li>
+      </ul>
+      <p><strong>Visuel</strong> : Une cape vivante tissée de mousse, de lianes et de feuillages qui réagissent au climat, ondulant doucement comme une forêt vivante.</p>
+   </div>
 
 
 
 
-         <div class="objet2">
+   <div class="objet2">
 
-            <h2 id="-2-b-ton-des-quatre-saisons-b-ton-artefact-">🪵 2. Bâton des Quatre Saisons <em>(Bâton, artefact)</em></h2>
-            <p><strong>Effet variable selon la saison</strong> (ou au choix par <strong>action bonus 1/jour</strong>) :  </p>
-            <ul>
-               <li>🌸 <strong>Printemps</strong> : <strong>Soins doublés</strong>. Accès à <em>croissance végétale</em> <strong>1/jour</strong>.  </li>
-               <li>☀️ <strong>Été</strong> : Vos sorts de feu infligent <strong>+2d6</strong>. Accès à <em>mur de feu</em>.  </li>
-               <li>🍂 <strong>Automne</strong> : Ennemis dans un rayon de <strong>3 m</strong> doivent réussir un <strong>jet de CON</strong> ou être <strong>affaiblis</strong>. Accès à <em>ralentissement</em>.  </li>
-               <li>❄️ <strong>Hiver</strong> : <strong>Résistance au froid</strong>. Accès à <em>tempête de neige</em> (homebrew).  </li>
-            </ul>
-            <p><strong>Spécial</strong> : Peut canaliser <em>tempête d’éléments</em> (mélange feu/froid/foudre) <strong>1/semaine</strong>.  </p>
-            <p><strong>Visuel</strong> : Un bâton noueux orné de bourgeons, de flammes, de feuilles mortes ou de givre selon la saison choisie.</p>
+      <h2 id="-2-b-ton-des-quatre-saisons-b-ton-artefact-">🪵 2. Bâton des Quatre Saisons <em>(Bâton, artefact)</em></h2>
+      <p><strong>Effet variable selon la saison</strong> (ou au choix par <strong>action bonus 1/jour</strong>) :  </p>
+      <ul>
+         <li>🌸 <strong>Printemps</strong> : <strong>Soins doublés</strong>. Accès à <em>croissance végétale</em> <strong>1/jour</strong>.  </li>
+         <li>☀️ <strong>Été</strong> : Vos sorts de feu infligent <strong>+2d6</strong>. Accès à <em>mur de feu</em>.  </li>
+         <li>🍂 <strong>Automne</strong> : Ennemis dans un rayon de <strong>3 m</strong> doivent réussir un <strong>jet de CON</strong> ou être <strong>affaiblis</strong>. Accès à <em>ralentissement</em>.  </li>
+         <li>❄️ <strong>Hiver</strong> : <strong>Résistance au froid</strong>. Accès à <em>tempête de neige</em> (homebrew).  </li>
+      </ul>
+      <p><strong>Spécial</strong> : Peut canaliser <em>tempête d'éléments</em> (mélange feu/froid/foudre) <strong>1/semaine</strong>.  </p>
+      <p><strong>Visuel</strong> : Un bâton noueux orné de bourgeons, de flammes, de feuilles mortes ou de givre selon la saison choisie.</p>
 
-         </div>
-
-
-
-         <div class="objet3">
-
-            <h2 id="-3-anneau-de-l-me-tot-mique-bague-tr-s-rare-">🐾 3. Anneau de l’Âme Totémique <em>(Bague, très rare)</em></h2>
-            <p><strong>Effet</strong> :  </p>
-            <ul>
-               <li>🦌 Vous pouvez <strong>communiquer télépathiquement</strong> avec toutes les bêtes.  </li>
-               <li>🦅 <strong>2x/jour</strong>, fusionnez brièvement avec un esprit animal (ours, cerf, corbeau, etc.) pour gagner une capacité spécifique (ex. : vol, charge, vision).  </li>
-               <li>🐺 En forme animale, vous êtes considéré comme <strong>magique</strong> pour surmonter les résistances.  </li>
-            </ul>
-            <p><strong>Visuel</strong> : Une bague sculptée de motifs animaux entrelacés, brillant d’une lueur fauve.</p>
-
-         </div>
+   </div>
 
 
 
-         <div class="objet4">
+   <div class="objet3">
 
-            <h2 id="-4-amulette-du-souffle-verdoyant-collier-rare-">🪶 4. Amulette du Souffle Verdoyant <em>(Collier, rare)</em></h2>
-            <p><strong>Effet</strong> :  </p>
-            <ul>
-               <li>🌬️ <strong>1/long rest</strong>, libérez une <strong>brume curative</strong> : tous les alliés dans un rayon de <strong>9 m</strong> récupèrent <strong>4d8 + Sagesse PV</strong>.  </li>
-               <li>🛡️ <strong>Avantage</strong> aux jets contre poison, maladie, corruption ou effet artificiel.  </li>
-               <li>🌿 Vos sorts druidiques <strong>ne peuvent pas être contrecarrés</strong> par magie non-naturelle.  </li>
-            </ul>
-            <p><strong>Visuel</strong> : Un pendentif en forme de feuille délicate, pulsant d’une douce lumière verte.</p>
+      <h2 id="-3-anneau-de-l-me-tot-mique-bague-tr-s-rare-">🐾 3. Anneau de l'Âme Totémique <em>(Bague, très rare)</em></h2>
+      <p><strong>Effet</strong> :  </p>
+      <ul>
+         <li>🦌 Vous pouvez <strong>communiquer télépathiquement</strong> avec toutes les bêtes.  </li>
+         <li>🦅 <strong>2x/jour</strong>, fusionnez brièvement avec un esprit animal (ours, cerf, corbeau, etc.) pour gagner une capacité spécifique (ex. : vol, charge, vision).  </li>
+         <li>🐺 En forme animale, vous êtes considéré comme <strong>magique</strong> pour surmonter les résistances.  </li>
+      </ul>
+      <p><strong>Visuel</strong> : Une bague sculptée de motifs animaux entrelacés, brillant d'une lueur fauve.</p>
 
-         </div>
-
-
-
-         <div class="objet5">
-
-            <h2 id="-5-fleur-du-premier-jardin-objet-de-t-te-l-gendaire-">🌸 5. Fleur du Premier Jardin <em>(Objet de tête, légendaire)</em></h2>
-            <p><strong>Effet</strong> :  </p>
-            <ul>
-               <li>🌼 Vous pouvez <strong>faire fleurir la terre</strong> autour de vous : toute zone de <strong>18 m</strong> devient un <strong>terrain bénéfique</strong> (soins +2, inspiration naturelle, refuge).  </li>
-               <li>🌱 <strong>1/mois</strong> : <em>Renaissance de la Vie</em> — vous pouvez ramener à la vie toutes les créatures mortes dans un rayon de <strong>30 m</strong> durant les dernières <strong>10 minutes</strong>.  </li>
-               <li>🌿 Placée sur le front, vous <strong>ne vieillissez plus</strong> et êtes <strong>protégé de toute magie de mort naturelle</strong>.  </li>
-            </ul>
-            <p><strong>Visuel</strong> : Une couronne de fleurs éclatantes, vibrant d’une énergie vitale et éternelle.</p>
-
-         </div>
-      </div>
+   </div>
 
 
 
-      <div class="effetSet">
+   <div class="objet4">
 
-         <h2 id="-effet-de-set-communion-primordiale-">🌿 Effet de Set — <em>Communion Primordiale</em></h2>
-         <p>Lorsque les <strong>5 objets</strong> sont réunis, le druide peut activer <strong>l’Héritage du Premier Arbre</strong> :  </p>
-         <ul>
-            <li>🌍 <strong>Durée</strong> : 10 minutes (<strong>1/semaine</strong>)  </li>
-            <li>
-               Vous devenez une <strong>incarnation vivante de la nature</strong> :
-               <ul>
-                  <li>🐾 Toutes vos <strong>formes de druide</strong> sont fusionnées (combinez jusqu’à <strong>2 formes animales</strong>).  </li>
-                  <li>😱 Les créatures hostiles à la nature (morts-vivants, artificiels, corrompus) doivent réussir un <strong>jet de Sagesse DD 20</strong> ou <strong>fuir</strong>.  </li>
-                  <li>🦋 Toutes les créatures naturelles (bêtes, fées, élémentaires) deviennent vos <strong>alliées</strong> pendant cette période.  </li>
-                  <li>🌳 À la fin de l’effet : vous laissez un <strong>sanctuaire naturel permanent</strong> là où vous avez activé le pouvoir.  </li>
-               </ul>
-            </li>
-         </ul>
-         <p><strong>Visuel</strong> : Une aura verdoyante enveloppe le druide, des racines et des fleurs éphémères jaillissant du sol à chacun de ses pas.</p>
+      <h2 id="-4-amulette-du-souffle-verdoyant-collier-rare-">🪶 4. Amulette du Souffle Verdoyant <em>(Collier, rare)</em></h2>
+      <p><strong>Effet</strong> :  </p>
+      <ul>
+         <li>🌬️ <strong>1/long rest</strong>, libérez une <strong>brume curative</strong> : tous les alliés dans un rayon de <strong>9 m</strong> récupèrent <strong>4d8 + Sagesse PV</strong>.  </li>
+         <li>🛡️ <strong>Avantage</strong> aux jets contre poison, maladie, corruption ou effet artificiel.  </li>
+         <li>🌿 Vos sorts druidiques <strong>ne peuvent pas être contrecarrés</strong> par magie non-naturelle.  </li>
+      </ul>
+      <p><strong>Visuel</strong> : Un pendentif en forme de feuille délicate, pulsant d'une douce lumière verte.</p>
 
-      </div>
+   </div>
 
-   </body>
+
+
+   <div class="objet5">
+
+      <h2 id="-5-fleur-du-premier-jardin-objet-de-t-te-l-gendaire-">🌸 5. Fleur du Premier Jardin <em>(Objet de tête, légendaire)</em></h2>
+      <p><strong>Effet</strong> :  </p>
+      <ul>
+         <li>🌼 Vous pouvez <strong>faire fleurir la terre</strong> autour de vous : toute zone de <strong>18 m</strong> devient un <strong>terrain bénéfique</strong> (soins +2, inspiration naturelle, refuge).  </li>
+         <li>🌱 <strong>1/mois</strong> : <em>Renaissance de la Vie</em> — vous pouvez ramener à la vie toutes les créatures mortes dans un rayon de <strong>30 m</strong> durant les dernières <strong>10 minutes</strong>.  </li>
+         <li>🌿 Placée sur le front, vous <strong>ne vieillissez plus</strong> et êtes <strong>protégé de toute magie de mort naturelle</strong>.  </li>
+      </ul>
+      <p><strong>Visuel</strong> : Une couronne de fleurs éclatantes, vibrant d'une énergie vitale et éternelle.</p>
+
+   </div>
+</div>
+
+
+</body>
 </html>
